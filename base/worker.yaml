@@ -17,3 +17,16 @@ spec:
           command: ["celery", "-A", "app.celery_app", "worker", "--loglevel=info"]
           envFrom:
             - secretRef: {name: airgap-sync-secrets}
+          volumeMounts:
+            - name: pull-secret
+              mountPath: /root/.docker
+              readOnly: true
+            - name: mirror-workdir
+              mountPath: /tmp/mirror-jobs
+      volumes:
+        - name: pull-secret
+          secret:
+            secretName: oc-mirror-pull-secret
+        - name: mirror-workdir
+          emptyDir:
+            sizeLimit: 30Gi
