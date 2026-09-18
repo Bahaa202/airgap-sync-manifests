@@ -31,4 +31,4 @@ spec:
             secretName: oc-mirror-pull-secret
         - name: mirror-workdir
           emptyDir:
-            sizeLimit: 30Gi
+            sizeLimit: 60Gi
